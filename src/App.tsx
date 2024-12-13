@@ -1,10 +1,9 @@
+import {Products} from "./components/Products.tsx";
+import {products} from "./mocks/products.json";
 function App() {
     return (
-
-        <div>
-
-            <h1>Hola</h1>
-
+        <div >
+           <Products products={products}></Products>
         </div>
     )
 }
