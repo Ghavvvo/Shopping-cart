@@ -1,15 +1,14 @@
 import './Filters.css'
-import { useState } from "react";
+
 import { useFilters } from "../hooks/useFilters.tsx";
 
 
 
 export default function Filters() {
-    const { setFilters } = useFilters();
-    const [minPrice, setMinPrice] = useState(0);
+    const { filters , setFilters } = useFilters();
 
     const handleChangeMinPrice = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMinPrice(Number(event.target.value));
+
         setFilters((prevState) => ({
             ...prevState,
             minPrice: Number(event.target.value)
@@ -28,7 +27,7 @@ export default function Filters() {
             <div>
                 <label htmlFor="price">Price</label>
                 <input onChange={handleChangeMinPrice} min="0" max="1000" type="range" id="price" />
-                <span>{minPrice}</span>
+                <span>{filters.minPrice}</span>
             </div>
             <div>
                 <label htmlFor="category">Category</label>
@@ -36,7 +35,7 @@ export default function Filters() {
                     <option value="all">All</option>
                     <option value="beauty">Beauty</option>
                     <option value="groceries">Groceries</option>
-                    <option value="fragrances">Fragrances</option>
+                    <option value="fragrances">F ragrances</option>
                 </select>
             </div>
         </div>
