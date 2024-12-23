@@ -5,3 +5,8 @@ export type Product = {
     thumbnail: string;
     category: string;
 }
+
+export type FilterContextType = {
+    filters: { category: string, minPrice: number },
+    setFilters: (filters: (prevState : { category: string, minPrice: number }  ) => { category: string, minPrice: number }) => void
+};

@@ -6,6 +6,7 @@ import { createBrowserRouter,RouterProvider} from 'react-router-dom'
 import { ProfilesPage } from './components/ProfilesPage'
 import {NotFound} from "./components/NotFound.tsx";
 import {ProfilePage} from "./components/ProfilePage.tsx";
+import {FilterContextProvider} from "./context/filterContext.tsx";
 
 const router = createBrowserRouter([
 
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <FilterContextProvider>
+      <App/>
+    </FilterContextProvider>
+
   </StrictMode>,
 )
