@@ -1,18 +1,17 @@
 import './Products.css'
 import {AddToCartIcon} from "./Icons.tsx";
+import {UseCart} from "../hooks/useCart.tsx";
+import {Product} from "../types.tsx";
 
-type Product = {
-    id: number;
-    title: string;
-    price: number;
-    thumbnail: string;
-}
+
 
 interface Props
 {
     products: Product[]
 }
 export function Products({products}: Props){
+    const {addProduct} = UseCart()
+
     return (
         <main className={'products'}>
             <ul>
@@ -26,8 +25,8 @@ export function Products({products}: Props){
                             <strong>{product.id}</strong>
                         </div>
                         <div>
-                            <button>
-                                <AddToCartIcon/>
+                            <button onClick={() => addProduct(product)}>
+                                <AddToCartIcon />
                             </button>
                         </div>
 
