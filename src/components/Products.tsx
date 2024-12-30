@@ -1,38 +1,49 @@
 import './Products.css'
-import {AddToCartIcon} from "./Icons.tsx";
-import {UseCart} from "../hooks/useCart.tsx";
-import {Product} from "../types.tsx";
+import { AddToCartIcon, RemoveFromCartIcon } from "./Icons.tsx";
+import { UseCart } from "../hooks/useCart.tsx";
+import { Product } from "../types.tsx";
 
-
-
-interface Props
-{
-    products: Product[]
+interface Props {
+    products: Product[];
 }
-export function Products({products}: Props){
-    const {addProduct} = UseCart()
+
+export function Products({ products }: Props) {
+    const { state, addProduct, deleteProduct } = UseCart();
+
+    const checkProductInCart = (product: Product) => {
+        return state.some(item => item.product.id === product.id);
+    };
 
     return (
         <main className={'products'}>
             <ul>
-                {products.map((product : Product) =>(
-                    <li key={product.id}>
-                        <img src={product.thumbnail} alt={product.title}/>
-                        <div>
-                            <strong>${product.price}</strong>
-                        </div>
-                        <div>
-                            <strong>{product.id}</strong>
-                        </div>
-                        <div>
-                            <button onClick={() => addProduct(product)}>
-                                <AddToCartIcon />
-                            </button>
-                        </div>
+                {products.map((product: Product) => {
+                    const isProductInCart = checkProductInCart(product);
 
-                    </li>
-                ))}
+                    return (
+                        <li key={product.id}>
+                            <img src={product.thumbnail} alt={product.title} />
+                            <div>
+                                <strong>${product.price}</strong>
+                            </div>
+                            <div>
+                                <strong>{product.id}</strong>
+                            </div>
+                            <div>
+                                <button onClick={() => {
+                                    if (isProductInCart) {
+                                        deleteProduct(product);
+                                    } else {
+                                        addProduct(product);
+                                    }
+                                }}>
+                                    {isProductInCart ? <RemoveFromCartIcon /> : <AddToCartIcon />}
+                                </button>
+                            </div>
+                        </li>
+                    );
+                })}
             </ul>
         </main>
-    )
+    );
 }
