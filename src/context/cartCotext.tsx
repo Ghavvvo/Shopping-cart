@@ -1,6 +1,7 @@
 import React, {createContext, useReducer} from "react";
 import {Product, ProductsCartType} from "../types.tsx";
 import CartReducer from "../reducers/cartReducer.tsx";
+import {cartInitialState} from "../reducers/cartReducer.tsx";
 
 
 export const CartContext = createContext<{
@@ -12,7 +13,7 @@ export const CartContext = createContext<{
 
 export function CartContextProvider({children}: {children : React.ReactNode }) {
 
-    const [state,dispatch]= useReducer(CartReducer, [])
+    const [state,dispatch]= useReducer(CartReducer, cartInitialState)
 
 
     const clearCart = () => {
